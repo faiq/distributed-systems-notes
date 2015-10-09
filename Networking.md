@@ -42,11 +42,11 @@ Some examples of Media:
 
 4. Bridges connect different LAN segments together, Layer 2 of the OSI model.
 
-5. Routers determine the next point where a packet should go.
+5. Routers sit on the gateway of networks and determine the next point where a packet should go.
 
 ## Internet Protocol
 
-The internet protocol (IP) connects together different machines across seperately connected networks
+The internet protocol (IP) connects together different machines across seperately connected networks. It routes a packet from one physical network to another.
 
 In the internet protocol every machine is given a 32 bit unique address- which means there are a total of over 4 billion unique addresses! 
 
@@ -59,3 +59,18 @@ host number — identifies a machine on that network.
 
 So now routers can keep track of a smaller number of network numbers and forward traffic for hosts outside of thier network. However there are many small networks and few big ones. This means large networks need more space in the address for the host number and smaller ones don't need as much. So networks are split up into different classes.
 
+## How IP relates to the OS
+
+Operating systems have an IP driver which control thigns like: getting the maximum packet size for the current computer, routing from one address to another, breaking packets up, recieve data from the driver.
+
+This device driver that controls the network interface card process getting packets and sending them to the IP driver.And send the packets from the ip driver to the hardware so it can make it's long difficult journey through the internet.
+
+Computers dont know about thier IP addresses, so they use an Address Resolution Protocol to convert IP addresses in packets to local device.
+
+## Protocols over IP
+
+1. TCP - (connection orriented) creates a virtual connection which involves sending acknowledgement packets, checksums to validate data. ensures data arrives in sequence.
+
+2. UDP - connectionless protocol - data may arrive out of sequence and might be lost an address must be specified in every request.
+
+We interface with these in our software through sockets.
