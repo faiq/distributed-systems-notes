@@ -73,4 +73,5 @@ Computers dont know about thier IP addresses, so they use an Address Resolution 
 
 2. UDP - connectionless protocol - data may arrive out of sequence and might be lost an address must be specified in every request.
 
-We interface with these in our software through sockets.
+We interface with these protocols in our programs through sockets. We can perform reads and wites to a file, in fact we deal with sockets through file descriptors!
+
