@@ -14,7 +14,7 @@ The basic flow of a Remote Procedure Call goes like this:
 5. On Machine 2 execution of the given procedure begins, and when it's done a return value is passed to Process A.
 6. When Process A gets the return value it resumes execution as normal
 
-The flow of execution here is similar to any other program, but for the tiny fact that you're doing it across TWO DIFFERENT machines! Seriously, how cool is that?
+The flow of execution here is similar to any other program, except for the tiny fact that you're doing it across TWO DIFFERENT machines! Seriously, how cool is that?
 
 ## How does a Remote Procedure Call differ from a local procedure call?
 
