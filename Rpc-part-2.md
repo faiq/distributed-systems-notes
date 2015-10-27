@@ -6,7 +6,7 @@ So now that we have a basic understanding of the theory behind RPC lets work on 
 
 So lets get started.
 
-In this tutorial we're going to write a simple service that takes in an image and returns a list of tags related for that image. For the sake of simplicity, we won't be doing any image analysis ourselves and will be using an [external API] (clarifai.com) to do so. This is more of an exercise on transfering data with thrift.
+In this tutorial we're going to write a simple service that takes in an image and returns a list of tags related for that image. For the sake of simplicity, we won't be doing any image analysis ourselves and will be using an [external API] (http://clarifai.com) to do so. This is more of an exercise on transfering data with thrift.
 
 First thing you're going to want to do is download Apache Thrift! You can do that by clicking [this link] (https://thrift.apache.org/docs/install/) and following the instructions for your operating system. 
 
