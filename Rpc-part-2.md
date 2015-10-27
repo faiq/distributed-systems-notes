@@ -16,6 +16,61 @@ Next thing you're going to want to do create a `.thrift` file. This file is wher
     typedef binary image // here we are creating our own type, for readability, "image" which is an array of bytes
     
     service MakeTags {
-            list<string> generate(1: image) // here we are defining a service that has a method generate which returns a list of strings and takes in an image
+            list<string> generate(1: image img) // here we are defining a service that has a method generate which returns a list of strings and takes in an image called img
     }
 ```
+
+Now that we have our services in our Interface Defintion Language, lets compile it so we could use it in our code. In this example, I'll be using Golang, but thrift supports tons of languages so pick your favorite!
+
+To do this we'll use the thrift command line tool that we downloaded earlier.
+
+`thrift -r --gen go service.thrift`
+
+This should generate the following file tree
+
+```
+$ ls -R gen-go/
+service
+
+gen-go//service:
+constants.go        make_tags-remote    maketags.go     ttypes.go
+
+gen-go//service/make_tags-remote:
+make_tags-remote.go
+```
+
+The next step is to actually write some code to perform the remote procedure call. 
+
+First thing we need to do is write a client that will be performing this call, we'll call this `client.go` 
+
+```go
+package main
+
+import (
+	"fmt"
+	"git.apache.org/thrift.git/lib/go/thrift"
+	"github.com/faiq/gen-go/service"
+	"io/ioutil"
+	"os"
+	"path/filepath"
+)
+
+func main() {
+	socket, err := thrift.NewTSocket("localhost:8000")
+	if err != nil {
+		fmt.Printf("There was an error creating your socket! Here it is %v", err)
+	}
+	protocolFactory := thrift.NewTBinaryProtocolFactory()
+	client := service.NewMakeTagsClientFactory(socket, protocolFactory)
+	pwd, _ := os.Getwd()
+	fileName := pwd + "/img.png"
+	fileName, _ = filepath.Abs(fileName)
+	imgBytes, err := ioutil.ReadFile(fileName)
+	if err != nil {
+		fmt.Printf("There was an err reading the file! Here it is %v", err)
+	}
+	tags, err := client.Generate(service.Image(imgBytes))
+	fmt.Printf("These are the tags for your image %v", tags)
+	socket.Close()
+}
+``` 
