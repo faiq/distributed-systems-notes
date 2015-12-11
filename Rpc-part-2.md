@@ -99,7 +99,7 @@ In the following line, we're going to make a new thrift client with the transfer
 
 Here's a picture of the full stack!
 
-<img src="https://en.wikipedia.org/wiki/File:Apache_Thrift_architecture.png"/>
+<img src="https://upload.wikimedia.org/wikipedia/en/d/df/Apache_Thrift_architecture.png"/>
 
 The next few lines are specific to this example. In them, we are opening a file called "img.png", and reading it's contents into memory.
 
