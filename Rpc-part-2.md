@@ -1,14 +1,23 @@
-## Intro to Apache Thrift
+# Intro to Services Using Apache Thrift and Go
 
-Now that we have a basic understanding of the theory behind RPC lets work on a mini-application where we could practice some of the things we learned. In this tutorial, we will be using [Apache Thrift] (https://thrift.apache.org/), as our IDL and data serilizer. Not because it's the best or the worst, but because it's one of the most popular and well documented solutions out there.
+In my previous post I talked about the theory behind RPC, but what can we accomplish with it? How can we use it in our applications? How do we use it in our applications. These are all great questions to have. One popular use case for using RPC is implementing a Service Oriented Architecture (SOA). People have written books about Service Oriented Architecture, but to give you a general idea of what SOA is, lets break it down piece by piece. A Service is a contained program that accomplishes a certain task. For example, you can have a service to encrypt all of the data that you send it or you can have a service that checks a user's credentials. Therefore, a Service Oriented Architecture is a pattern of designing your systems that's based around having services that carry out specefic tasks. I strongly recommend that you check out some [of](http://blog.yohanliyanage.com/2012/03/getting-soa-right-thinking-beyond-the-right-angles/) [these](http://searchsoa.techtarget.com/definition/service-oriented-architecture) [awesome](http://stackoverflow.com/questions/2026523/what-is-soa-in-plain-english) links.
 
-Lets get started.
+What does SOA have to do with RPC? Services are functions that you execute on a remote server, and that's exactly what a Remote Procedure Call is.
 
-In this tutorial we're going to write a simple service that takes in an image and returns a list of tags related for that image. For the sake of simplicity, we won't be doing any image analysis ourselves and will be using an [external API] (http://clarifai.com) to do so. This is more of an exercise on transfering data with thrift.
+[Thrift](http://thrift.apache.org/) is an RPC framework that provides a language for you to write out Interfaces for services, and offers several different ways of encoding and transfering your data. The major benefits of using Thrift
 
-First thing you're going to want to do is download Apache Thrift! You can do that by clicking [this link] (https://thrift.apache.org/docs/install/) and following the instructions for your operating system. 
+In this post, we're going to write a simple service in Go that uses the Thrift framework that takes in an image, and returns a list of tags related for that image. 
 
-If you don't want to follow along and skip straight to the code you can find it on my [github 
+For the sake of simplicity, we won't be doing any image analysis ourselves and will be using [clarifai] (http://clarifai.com) to do so. If you're not familiar with it, Clarifai is an awesome service that provides tags for a provided image. This post is more of an exercise on transferring data and writing serices with Thrift, rather than the image analysis.
+
+First you're going to want to do is downloading our requirements:
+
+1. [Apache Thrift] (https://thrift.apache.org/docs/install/) 
+2. [Golang] (https://golang.org/dl/) 
+
+If you haven't done so already, you should [set up your go environment](https://golang.org/doc/code.html#Organization) 
+
+If you don't want to follow along and skip straight to the code you can find it on my [GitHub](https://github.com/faiq/intro-to-rpc)
 
 ## Setting Up Your Thrift File
 
@@ -110,4 +119,3 @@ Now that there's a an open connection between the RPC server and client, we're a
 Finally, we print out the tags we got for our image and close the socket that we opened.
 
 It's really important to note that you're not bound to using thrift the way that I used it. You have the choice between several different types of transportation and protocols. You can read more about the different option availble to you in this [awesome article](http://thrift-tutorial.readthedocs.org/en/latest/thrift-stack.html).
-
