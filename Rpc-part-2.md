@@ -4,11 +4,11 @@ In my previous post I talked about the theory behind RPC, but what can we accomp
 
 What does SOA have to do with RPC? Services are functions that you execute on a remote server, and that's exactly what a Remote Procedure Call is.
 
-[Thrift](http://thrift.apache.org/) is an RPC framework that provides a language for you to write out Interfaces for services, and offers several different ways of encoding and transfering your data. The major benefits of using Thrift
+[Thrift](http://thrift.apache.org/) is an RPC framework that provides a language for you to write out Interfaces for services, and offers several different ways of encoding and transfering your data.
 
 In this post, we're going to write a simple service in Go that uses the Thrift framework that takes in an image, and returns a list of tags related for that image. 
 
-For the sake of simplicity, we won't be doing any image analysis ourselves and will be using [clarifai] (http://clarifai.com) to do so. If you're not familiar with it, Clarifai is an awesome service that provides tags for a provided image. This post is more of an exercise on transferring data and writing serices with Thrift, rather than the image analysis.
+For the sake of simplicity, we won't be doing any image analysis ourselves and will be using [clarifai] (http://clarifai.com) to do so. If you're not familiar with it, Clarifai is an awesome service that provides tags for a provided image. This post is more of an exercise on transferring data and writing services with Thrift, rather than the image analysis.
 
 First you're going to want to do is downloading our requirements:
 
@@ -17,11 +17,16 @@ First you're going to want to do is downloading our requirements:
 
 If you haven't done so already, you should [set up your go environment](https://golang.org/doc/code.html#Organization) 
 
+
+Once all that is done, we're going to do is create a new project inside the GOPATH. So create a new folder under $GOPATH/src/github.com/<your_user_name>/intro-to-rpc
+
 If you don't want to follow along and skip straight to the code you can find it on my [GitHub](https://github.com/faiq/intro-to-rpc)
 
 ## Setting Up Your Thrift File
 
-Next thing you're going to want to do create a `.thrift` file. This file is where you're going to write the interface defintions for all your services and types so we could create langugae specific source code for doing RPC. 
+Next thing you're going to want to do create a `.thrift` file in the top level of your project.
+
+This file is where you're going to write the interface definition for the services that you're going to create so we could create language specific source code for doing RPC. 
 
 ```thrift
     typedef binary image // here we are creating our own type, for readability, "image" which is an array of bytes
@@ -31,7 +36,7 @@ Next thing you're going to want to do create a `.thrift` file. This file is wher
     }
 ```
 
-Now that we have our services in our Interface Defintion Language, lets compile it so we could use it in our code. In this example, I'll be using Golang, but thrift supports tons of languages so pick your favorite!
+Now that we have defined a contract for what our service is going to do, we can use the thrift to create code that handles the marshalling and packing/unpacking of data
 
 To do this we'll use the thrift command line tool that we downloaded earlier.
 
